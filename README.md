@@ -2,6 +2,7 @@
 
 ## Members:
 Karl Doherty - 19413086
-Yury Chupahin - XXXXXXXX
+Yury Chupahin - 19416764
+
 
 ## Project Description
