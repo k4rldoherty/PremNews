@@ -7,7 +7,6 @@ import firebase_admin
 from firebase import firebase
 from firebase_admin import credentials
 from firebase_admin import db
-import time
 
 cred = credentials.Certificate('firebase-sdk.json')
 firebase_admin.initialize_app(cred, {
