@@ -1,10 +1,7 @@
-# News Scraper 2
-# Karl Doherty
-
 from bs4 import BeautifulSoup
 import requests
 import re
-''' import firebase_admin
+import firebase_admin
 from firebase import firebase
 from firebase_admin import credentials
 from firebase_admin import db
@@ -13,8 +10,8 @@ cred = credentials.Certificate('firebase-sdk.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL' : 'https://premnews-99ac4-default-rtdb.europe-west1.firebasedatabase.app/'
 })
-ref = db.reference('/news/daily_mail')
-ref.delete() '''
+ref = db.reference('/news')
+ref.delete()
 
 url = 'https://www.dailymail.co.uk/sport/premierleague/index.html'
 content = requests.get(url)
@@ -30,20 +27,10 @@ for item in body:
     article_link = item.select_one('h2.linkro-darkred > a[href]')['href']
     article_list.append(article_link)
 
-i = 0
-while i < len(title_list):
-    print(title_list[i] + '\n' + article_list[i])
-    i+=1
-
-''' i=0
+i=0
 while i < len(title_list):
     ref.push({
         'Title' : title_list[i],
         'Link' : article_list[i] 
     })
-    i+=1 '''
-
-
-
-
-
+    i+=1
