@@ -23,8 +23,11 @@ article_list = []
 for item in body:
     title = item.find_all('h4', class_="news-list__headline")[0].text
     title_list.append(title.strip())
+    
     articles = [i['href'] for i in item.find_all('a', class_="news-list__headline-link")]
     article_list.append(articles)
+
+
 article_list = [item for sublist in article_list for item in sublist] # Changes the list of lists into a flat list
 
 i=0
