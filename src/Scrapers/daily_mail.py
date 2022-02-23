@@ -13,7 +13,6 @@ firebase_admin.initialize_app(cred, {
     'databaseURL' : 'https://premnews-99ac4-default-rtdb.europe-west1.firebasedatabase.app/'
 })
 ref = db.reference('/news')
-# ref.delete() # remove this when done testing
 
 url = 'https://www.dailymail.co.uk/sport/premierleague/index.html'
 content = requests.get(url)
@@ -35,9 +34,12 @@ for item in body:
 
 i=0
 while i < len(title_list):
-    ref.push({
-        'Title' : title_list[i],
-        'Link' : article_list[i],
-        'Date Added' : date_list[i]
-    })
+    if len(ref.order_by_child("Title").equal_to(title_list[i]).get()) == 0:
+        print("Dosent Exist")
+        ref.push({
+            'Title' : title_list[i],
+            'Link' : article_list[i] 
+        })
+    else:
+        print("Already Exists")
     i+=1

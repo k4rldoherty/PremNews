@@ -20,7 +20,6 @@ firebase_admin.initialize_app(cred, {
     'databaseURL' : 'https://premnews-99ac4-default-rtdb.europe-west1.firebasedatabase.app/'
 })
 ref = db.reference('/news')
-# ref.delete() # remove this when done testing
 
 url = 'https://www.independent.ie/sport/soccer/premier-league'
 content = requests.get(url)
@@ -29,7 +28,6 @@ body = soup.find_all('div', class_='c-card1-main')
 
 title_list = []
 link_list = []
-date_list = []
 
 for item in body:
     title = item.get_text()
@@ -41,20 +39,12 @@ for item in body:
 
 i=0
 while i < len(title_list):
-    if len(title_list[i]) <= 20:
-        title_list[i] = convert_link_2_title(link_list[i])
-    
-    print(title_list[i] + '   ' + link_list[i] + '\n')
-    i+=1
-
-
-
-i=0
-while i < len(title_list):
-    # CHECK IF ARTICLE IS IN DATABASE OR NOT ??
-
-    ref.push({
-        'Title' : title_list[i],
-        'Link' : link_list[i] 
-    })
+    if len(ref.order_by_child("Title").equal_to(title_list[i]).get()) == 0:
+        print("Dosent Exist")
+        ref.push({
+            'Title' : title_list[i],
+            'Link' : link_list[i] 
+        })
+    else:
+        print("Already Exists")
     i+=1

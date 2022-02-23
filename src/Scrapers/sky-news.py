@@ -1,4 +1,4 @@
-from turtle import title
+from unittest import result
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -12,7 +12,6 @@ firebase_admin.initialize_app(cred, {
     'databaseURL' : 'https://premnews-99ac4-default-rtdb.europe-west1.firebasedatabase.app/'
 })
 ref = db.reference('/news')
-# ref.delete()
 
 url = 'https://news.sky.com/topic/premier-league-3810'
 content = requests.get(url)
@@ -28,12 +27,14 @@ for item in body:
     link = item.find('a', class_='sdc-site-tile__headline-link').get('href')
     links_list.append('https://news.sky.com'  + link)
 
-i=0
+i = 0
 while i < len(titles_list):
-    # CHECK IF ARTICLE IS IN DATABASE OR NOT ??
-
-    ref.push({
+    if len(ref.order_by_child("Title").equal_to(titles_list[i]).get()) == 0:
+        print("Dosent Exist")
+        ref.push({
         'Title' : titles_list[i],
         'Link' : links_list[i] 
     })
+    else:
+        print("Already exists")
     i+=1
