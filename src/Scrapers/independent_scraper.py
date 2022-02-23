@@ -8,6 +8,13 @@ from firebase_admin import db
 from datetime import date
 import json
 
+# Function to change the link of an article to the title in cases where the Title has not been scraped correctly
+def convert_link_2_title(string):
+    string = string.split('/')
+    string = string[-1].capitalize().split('-')[:-1]
+    string = ' '.join(string)
+    return string
+
 cred = credentials.Certificate('firebase-sdk.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL' : 'https://premnews-99ac4-default-rtdb.europe-west1.firebasedatabase.app/'
@@ -34,5 +41,20 @@ for item in body:
 
 i=0
 while i < len(title_list):
-    print(title_list[i] + link_list[i] + '\n')
-    i += 1
+    if len(title_list[i]) <= 20:
+        title_list[i] = convert_link_2_title(link_list[i])
+    
+    print(title_list[i] + '   ' + link_list[i] + '\n')
+    i+=1
+
+
+
+i=0
+while i < len(title_list):
+    # CHECK IF ARTICLE IS IN DATABASE OR NOT ??
+
+    ref.push({
+        'Title' : title_list[i],
+        'Link' : link_list[i] 
+    })
+    i+=1
