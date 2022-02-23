@@ -1,4 +1,3 @@
-from unittest import result
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -6,6 +5,7 @@ import firebase_admin
 from firebase import firebase
 from firebase_admin import credentials
 from firebase_admin import db
+from datetime import date
 
 cred = credentials.Certificate('firebase-sdk.json')
 firebase_admin.initialize_app(cred, {
@@ -30,11 +30,13 @@ for item in body:
 i = 0
 while i < len(titles_list):
     if len(ref.order_by_child("Title").equal_to(titles_list[i]).get()) == 0:
-        print("Dosent Exist")
+        print("Dosent Exist. Adding ...")
         ref.push({
         'Title' : titles_list[i],
-        'Link' : links_list[i] 
+        'Link' : links_list[i],
+        'Date Added' : str(date.today()),
+        'Source' : 'Sky News' 
     })
     else:
-        print("Already exists")
+        print("Already exists. Ignoring ...")
     i+=1

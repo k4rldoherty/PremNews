@@ -29,17 +29,16 @@ for item in body:
     article_link = item.select_one('h2.linkro-darkred > a[href]')['href']
     article_list.append(article_link)
 
-    article_date = str(item.find_all('div', class_= 'channel-date-container sport'))[49:63]
-    date_list.append(article_date)
-
 i=0
 while i < len(title_list):
     if len(ref.order_by_child("Title").equal_to(title_list[i]).get()) == 0:
-        print("Dosent Exist")
+        print("Dosent Exist. Adding ...")
         ref.push({
             'Title' : title_list[i],
-            'Link' : article_list[i] 
+            'Link' : article_list[i],
+            'Date Added' : str(date.today()),
+            'Source' : 'Daily Mail'
         })
     else:
-        print("Already Exists")
+        print("Already Exists. Ignoring ...")
     i+=1

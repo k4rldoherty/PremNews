@@ -1,0 +1,11 @@
+run:
+	python independent_scraper.py
+	python sky-news.py
+	python daily_mail.py
+	python top_scorers.py
+	python fixtures.py
+	python live_scores.py
+	python premier_league_table.py
+
+clean:
+    rm -rf __pycache__

@@ -11,7 +11,6 @@ firebase_admin.initialize_app(cred, {
     'databaseURL' : 'https://premnews-99ac4-default-rtdb.europe-west1.firebasedatabase.app/'
 })
 ref = db.reference('/news')
-ref.delete()
 
 url = 'https://www.skysports.com/premier-league-news'
 content = requests.get(url)
