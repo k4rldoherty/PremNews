@@ -19,6 +19,7 @@ cred = credentials.Certificate('firebase-sdk.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL' : 'https://premnews-99ac4-default-rtdb.europe-west1.firebasedatabase.app/'
 })
+
 ref = db.reference('/news')
 
 url = 'https://www.independent.ie/sport/soccer/premier-league'
@@ -39,6 +40,11 @@ for item in body:
 
 i=0
 while i < len(title_list):
+    if "&" not in str(title_list[i]):
+        pass
+    else:
+        title_list[i] = str(title_list[i]).replace("&", " and ")
+
     if len(ref.order_by_child("Title").equal_to(title_list[i]).get()) == 0:
         print("Dosent Exist. Adding ...")
         ref.push({

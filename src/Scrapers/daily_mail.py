@@ -12,15 +12,16 @@ cred = credentials.Certificate('firebase-sdk.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL' : 'https://premnews-99ac4-default-rtdb.europe-west1.firebasedatabase.app/'
 })
+
 ref = db.reference('/news')
 
 url = 'https://www.dailymail.co.uk/sport/premierleague/index.html'
 content = requests.get(url)
 soup = BeautifulSoup(content.text, 'html.parser')
 body = soup.find_all('div', 'article article-small articletext-right')
+
 title_list = []
 article_list = []
-date_list = []
 
 for item in body:
     title = item.find_all('span', class_='social-headline')[0].text
@@ -31,6 +32,11 @@ for item in body:
 
 i=0
 while i < len(title_list):
+    if "&" not in str(title_list[i]):
+        pass
+    else:
+        title_list[i] = str(title_list[i]).replace("&", " and ")
+    
     if len(ref.order_by_child("Title").equal_to(title_list[i]).get()) == 0:
         print("Dosent Exist. Adding ...")
         ref.push({
