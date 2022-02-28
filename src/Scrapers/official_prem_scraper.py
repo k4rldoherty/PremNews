@@ -33,6 +33,7 @@ for link in links:
     if link.startswith('https://www.premierleague.com') == False:
         link = 'https://www.premierleague.com' + link
     link_list.append(link)
+    print(link)
 
 i = 0
 while i < len(title_list):
