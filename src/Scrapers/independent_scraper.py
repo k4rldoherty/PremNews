@@ -35,6 +35,9 @@ for item in body:
 
 i=0
 while i < len(title_list):
+    if len(str(title_list[i])) < 20:
+        print(title_list[i])
+        title_list[i] = str(convert_link_2_title(link_list[i]))
     if "&" not in str(title_list[i]):
         pass
     else:
