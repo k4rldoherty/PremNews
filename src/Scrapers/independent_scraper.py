@@ -15,11 +15,6 @@ def convert_link_2_title(string):
     string = ' '.join(string)
     return string
 
-cred = credentials.Certificate('firebase-sdk.json')
-firebase_admin.initialize_app(cred, {
-    'databaseURL' : 'https://premnews-99ac4-default-rtdb.europe-west1.firebasedatabase.app/'
-})
-
 ref = db.reference('/news')
 
 url = 'https://www.independent.ie/sport/soccer/premier-league'
