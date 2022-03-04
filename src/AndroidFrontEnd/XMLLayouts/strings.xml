@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PremNews</string>
+    <string name="done">done</string>
+    <string-array name="src_array">
+        <item>Sky News</item>
+        <item>Independent</item>
+        <item>Premier League Official</item>
+        <item>Daily Mail</item>
+    </string-array>
+
+    <string-array name="date_array">
+        <item>Newest First</item>
+        <item>Oldest First</item>
+    </string-array>
+</resources>
