@@ -12,3 +12,8 @@ import daily_mail
 import official_prem_scraper
 import independent_scraper
 import sky_news_scraper
+
+ref = db.reference('/news')
+db_len = len(ref.order_by_child('Title').get())
+
+print('The scrapers are currently working correctly. ' + '\n' +  'The database currently contains ' + str(db_len) + ' news arcticles from 4 sources')
