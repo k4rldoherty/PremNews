@@ -4,6 +4,8 @@ This includes your Video Walkthrough and your Final documentation (Technical Spe
 
 #### Video Walkthrough
 
+Link to demo video: https://drive.google.com/drive/folders/1HcTFq9RfmQMpNRtDtw4e5HosAFE3MbFr?usp=sharing
+
 Instructions:
 
 * Upload your video walk through to Google Drive.
