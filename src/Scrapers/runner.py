@@ -20,7 +20,7 @@ try:
     import official_prem_scraper
     import independent_scraper
     import sky_news_scraper
-    print('The scrapers are currently working correctly. ' + '\n' +  'The database currently contains ' + str(db_len) + ' news arcticles from 4 sources')
+    print('\nThe scrapers are currently working correctly. ' + '\n' +  'The database currently contains ' + str(db_len) + ' news arcticles from 4 sources')
 
 except FileNotFoundError:
     print("There is a missing file!")

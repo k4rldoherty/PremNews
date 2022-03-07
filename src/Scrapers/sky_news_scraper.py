@@ -20,11 +20,14 @@ links_list = []
 for item in body:
     headline = item.find_all('span', class_='sdc-site-tile__headline-text')[0].text
     titles_list.append(headline)
+    print(headline + "has been added successfully.")
 
     link = item.find('a', class_='sdc-site-tile__headline-link').get('href')
     links_list.append('https://news.sky.com'  + link)
+    print(link + " has been added successfully.")
 
 i = 0
+print("Adding new stories to database...")
 while i < len(titles_list):
     if "&" not in str(titles_list[i]):
         pass
@@ -42,3 +45,5 @@ while i < len(titles_list):
     else:
         print("Already exists. Ignoring ...")
     i+=1
+
+print("All news stories from Sky News have been added successfully\n\n")

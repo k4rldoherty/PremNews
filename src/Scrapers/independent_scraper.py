@@ -29,14 +29,16 @@ for item in body:
     title = item.get_text()
     title = title.strip().split('\n')[0]
     title_list.append(title)
+    print(title + " has been added successfully.")
 
     link = item.select_one('div.c-card1-main > a[href]')['href']
     link_list.append(link)
+    print(link + " has been added successfully.")
 
 i=0
+print("Adding new stories to database...")
 while i < len(title_list):
     if len(str(title_list[i])) < 20:
-        print(title_list[i])
         title_list[i] = str(convert_link_2_title(link_list[i]))
     if "&" not in str(title_list[i]):
         pass
@@ -54,3 +56,5 @@ while i < len(title_list):
     else:
         print("Already Exists. Ignoring ...")
     i+=1
+
+print("All news stories from The Independent have been added successfully\n\n")

@@ -24,15 +24,17 @@ for title in titles:
     if title.endswith("External Link"):
         title = title[:-13]
     title_list.append(title)
+    print(title + " has been added successfully.")
 
 for link in links:
     link = link.select_one("div.col-9-m > a[href]")["href"]
     if link.startswith('https://www.premierleague.com') == False:
         link = 'https://www.premierleague.com' + link
     link_list.append(link)
-    print(link)
+    print(link + " has been added successfully.")
 
 i = 0
+print("Adding new stories to database...")
 while i < len(title_list):
     if "&" not in str(title_list[i]):
         pass
@@ -51,4 +53,4 @@ while i < len(title_list):
         print("Already Exists. Ignoring ...")
     i+=1
     
-    
+print("All news stories from The Premier League's Official Website have been added successfully\n\n")

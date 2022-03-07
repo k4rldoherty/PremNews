@@ -21,11 +21,14 @@ article_list = []
 for item in body:
     title = item.find_all('span', class_='social-headline')[0].text
     title_list.append(title.strip())
+    print(title + "has been added successfully.")
 
     article_link = item.select_one('h2.linkro-darkred > a[href]')['href']
     article_list.append(article_link)
+    print(article_link + " has been added successfully.")
 
 i=0
+print("Adding new stories to database...")
 while i < len(title_list):
     if "&" not in str(title_list[i]):
         pass
@@ -43,3 +46,5 @@ while i < len(title_list):
     else:
         print("Already Exists. Ignoring ...")
     i+=1
+
+print("All news stories from Daily Mail have been added successfully\n\n")
